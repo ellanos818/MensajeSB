@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensaje Especial</title>
+  <!-- Cargar una fuente similar de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: #f7c723; /* Color de texto */
+      font-family: 'Indie Flower', cursive; /* Fuente similar a Sanswhimsy */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    h1, p {
+      margin: 10px 0;
+      font-size: 2.5rem; /* Tamaño de fuente más grande */
+    }
+
+    input {
+      padding: 10px;
+      margin: 20px 0;
+      border: 2px solid #f7c723;
+      background-color: transparent;
+      color: #f7c723;
+      font-size: 1.5rem; /* Tamaño de fuente más grande */
+      text-align: center;
+      font-family: 'Indie Flower', cursive; /* Misma fuente */
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #f7c723; /* Fondo del botón */
+      color: #f79423; /* Color del texto del botón */
+      border: none;
+      border-radius: 25px; /* Botones redondeados */
+      cursor: pointer;
+      font-size: 1.5rem; /* Tamaño de fuente más grande */
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      font-family: 'Indie Flower', cursive; /* Misma fuente */
+    }
+
+    button:hover {
+      background-color: #ffffff; /* Cambio de color al pasar el mouse */
+    }
+
+    img {
+      max-width: 300px; /* Imágenes más grandes */
+      margin: 20px 0;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Estilo del botón de mute */
+    .mute-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #f7c723;
+      color: #f79423;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    /* Estilo del botón de regresar */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #f7c723;
+      color: #f79423;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* Estilo para el texto alternado */
+    .alternate-color {
+      color: #f79423;
+    }
+
+    /* Panel con scroll para el texto */
+    .scroll-panel {
+      max-height: 300px; /* Altura máxima del panel */
+      overflow-y: auto; /* Habilitar scroll vertical */
+      width: 80%; /* Ancho del panel */
+      margin: 20px 0;
+      padding: 10px;
+      border: 2px solid #f7c723; /* Borde del panel */
+      border-radius: 10px; /* Bordes redondeados */
+    }
+
+    .scroll-panel p {
+      font-size: 1.4rem; /* Tamaño de fuente más pequeño */
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón de mute -->
+  <button class="mute-button" onclick="toggleMute()">🔇</button>
+
+  <!-- Pantalla 1: Ingresa tu nombre -->
+  <div class="screen active" id="screen1">
+    <h1>Hola!</h1>
+    <p>Ingresa tu nombre aquí:</p>
+    <input type="text" id="nameInput" placeholder="Tu nombre">
+    <img src="https://drive.google.com/file/d/1gmvNXsfmqE_NgGbE4gqL8UOU-BaiGXiK/view?usp=drive_link" alt="Imagen 1">
+    <button onclick="nextScreen();restartMusic()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 2: Mensaje personalizado -->
+  <div class="screen" id="screen2">
+    <h1 id="personalizedMessage"></h1>
+    <img src="https://drive.google.com/file/d/1scPpa8Y50ofiKsdQF5Luv5ob5Mr9cTGi/view?usp=drive_link" alt="Imagen 2">
+    <button onclick="nextScreen()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 3: Mensaje 2 -->
+  <div class="screen" id="screen3">
+    <p>Si has sido el destinatario de este mensaje es porque, aunque no sea relevante…</p>
+    <img src="https://drive.google.com/file/d/1n_EhrW0jWpXMTT71__8QZPSVVRP2HXto/view?usp=drive_link" alt="Imagen 3">
+    <button onclick="nextScreen()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 4: Mensaje 3 -->
+  <div class="screen" id="screen4">
+    <p style="font-size: 1.75rem;">Tu sí lo eres para mi vida.</p>
+    <img src="https://drive.google.com/file/d/1QcCVTuoSF4vklZgIExXg_dMmIaUNUIb6/view?usp=drive_link" alt="Imagen 4">
+    <button onclick="nextScreen()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 5: Mensaje 4 -->
+  <div class="screen" id="screen5">
+    <p>Gracias por una amistad que salió quizá de lo más random o de las circunstancias de la vida, me alegra conocerte y considerarte mi amigo, quizá no siempre sea emotivo o hable mucho, quizá no nos contemos todo lo que nos pasa, pero sabes que de mí tendrás siempre una amistad sincera y con deseos de compartir algo juntos, un mensaje, un meme, una llamada, un paseo, una comida, un rato chill, siempre será un placer y si algún día te encuentras en dificultad sabes que ahí estaré porque como dicen “un amigo es leal y como un hermano en necesidad”.</p>
+    <img src="https://drive.google.com/file/d/1CX9dGNJ68JdMHegnFTvXqyLlrC52g8GF/view?usp=drive_link" alt="Imagen 5">
+    <button onclick="nextScreen()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 6: Mensaje final -->
+  <div class="screen" id="screen6">
+    <p>Así que solo quiero decirte gracias, gracias por tu amistad, ¡¡por ser una gran persona tal como eres!!</p>
+    <img src="https://drive.google.com/file/d/1jGPYjSO-K_Pjvx5N34gbwCcQ0mU5wnx1/view?usp=drive_link" alt="Imagen 6">
+    <button onclick="nextScreen()">Siguiente ▶</button>
+  </div>
+
+  <!-- Pantalla 7: Te quiere tu amigo Lalo -->
+  <div class="screen" id="screen7">
+    <h1>Te quiere tu amigo Lalo</h1>
+    <img src="https://drive.google.com/file/d/1qSTgEu6pSMG0Nc8wMBZivYod1onQrSjT/view?usp=drive_link" alt="Imagen 7">
+    <p>¿Qué quieres hacer ahora?</p>
+    <button onclick="goToMusicDynamic()">Hacer la dinámica musical 🎶</button>
+    <button onclick="goToMusicBackground()">Seguir escuchando la música de fondo 🎵 (dedicada para ti)</button>
+  </div>
+
+  <!-- Pantalla 8: Dinámica musical -->
+  <div class="screen" id="screen8">
+    <button class="back-button" onclick="goBackToScreen7()">⬅ Regresar</button>
+    <h1>Agrega una canción que te recuerde a mí</h1>
+    <p>Si me gusta, te invitaré algo (las estaré escuchando este día 🎧).</p>
+    <button onclick="goToPlaylist()">Ir al Playlist 🎧</button>
+  </div>
+
+  <!-- Pantalla 9: Música de fondo -->
+  <div class="screen" id="screen9">
+    <button class="back-button" onclick="goBackToScreen7()">⬅ Regresar</button>
+    <h1>Música de fondo</h1>
+    <img src="https://drive.google.com/file/d/1vHGSU2tkHGrajiesx8S07Hpd9MyDPtyd/view?usp=drive_link" alt="Imagen 8">
+    <div class="music-controls">
+      <button onclick="restartMusic()">Reiniciar canción</button>
+      <button onclick="pauseMusic()">Pausar canción</button>
+      <button onclick="goToPlaylist()">+ Una rolita a mi playlist</button>
+    </div>
+    <!-- Panel con scroll para el texto -->
+    <div class="scroll-panel">
+      <p class="alternate-color">No hay combinación de palabras que podría poner en el reverso de una postal.</p>
+      <p>There's no combination of words I could put on the back of a postcard.</p>
+      <p class="alternate-color">No hay canción que pueda cantar, pero puedo intentarlo por tu corazón.</p>
+      <p>No song that I could sing, but I can try for your heart.</p>
+      <p class="alternate-color">Nuestros sueños, y están hechos de cosas reales.</p>
+      <p>Our dreams, and they are made out of real things.</p>
+      <p class="alternate-color">Como una caja de zapatos de fotografías.</p>
+      <p>Like a shoe box of photographs.</p>
+      <p class="alternate-color">Con amor en tonos sepia.</p>
+      <p>With sepia-toned loving.</p>
+      <p class="alternate-color">El amor es la respuesta, al menos para la mayoría de las preguntas de mi corazón.</p>
+      <p>Love is the answer, at least for most of the questions in my heart.</p>
+      <p class="alternate-color">¿Por qué estamos aquí?</p>
+      <p>Like why are we here?</p>
+      <p class="alternate-color">¿Y adónde vamos?</p>
+      <p>And where do we go?</p>
+      <p class="alternate-color">¿Y por qué es tan difícil?</p>
+      <p>And how come it's so hard?</p>
+      <p class="alternate-color">No siempre es fácil y.</p>
+      <p>It's not always easy and.</p>
+      <p class="alternate-color">A veces la vida puede ser engañosa.</p>
+      <p>Sometimes life can be deceiving.</p>
+      <p class="alternate-color">Te diré una cosa, siempre es mejor cuando estamos juntos.</p>
+      <p>I'll tell you one thing, it's always better when we're together.</p>
+      <p class="alternate-color">Mmm, siempre es mejor cuando estamos juntos.</p>
+      <p>Mmm, it's always better when we're together.</p>
+      <p class="alternate-color">Sí, miraremos las estrellas cuando estemos juntos.</p>
+      <p>Yeah, we'll look at the stars when we're together.</p>
+      <p class="alternate-color">Bueno, siempre es mejor cuando estamos juntos.</p>
+      <p>Well, it's always better when we're together.</p>
+      <p class="alternate-color">Sí, siempre es mejor cuando estamos juntos.</p>
+      <p>Yeah, it's always better when we're together.</p>
+      <p class="alternate-color">Y todos estos momentos.</p>
+      <p>And all of these moments.</p>
+      <p class="alternate-color">Quizás encuentren su camino hacia mis sueños esta noche.</p>
+      <p>Just might find their way into my dreams tonight.</p>
+      <p class="alternate-color">Pero sé que se habrán ido.</p>
+      <p>But I know that they'll be gone.</p>
+      <p class="alternate-color">Cuando la luz de la mañana canta.</p>
+      <p>When the morning light sings.</p>
+      <p class="alternate-color">O trae cosas nuevas.</p>
+      <p>Or brings new things.</p>
+      <p class="alternate-color">Para mañana por la noche verás.</p>
+      <p>For tomorrow night you see.</p>
+      <p class="alternate-color">que ellos también se habrán ido.</p>
+      <p>That they'll be gone too.</p>
+      <p class="alternate-color">Demasiadas cosas que tengo que hacer.</p>
+      <p>Too many things I have to do.</p>
+      <p class="alternate-color">Pero si todos estos sueños pudieran encontrar su camino.</p>
+      <p>But if all of these dreams might find their way.</p>
+      <p class="alternate-color">En mi escena del día a día.</p>
+      <p>Into my day to day scene.</p>
+      <p class="alternate-color">estaría bajo la impresión.</p>
+      <p>I'd be under the impression.</p>
+      <p class="alternate-color">Yo estaba en algún punto intermedio.</p>
+      <p>I was somewhere in between.</p>
+      <p class="alternate-color">con solo dos.</p>
+      <p>With only two.</p>
+      <p class="alternate-color">solo tu y yo.</p>
+      <p>Just me and you.</p>
+      <p class="alternate-color">No hay tantas cosas que tenemos que hacer.</p>
+      <p>Not so many things we got to do.</p>
+      <p class="alternate-color">O lugares donde tenemos que estar.</p>
+      <p>Or places we got to be.</p>
+      <p class="alternate-color">Nos sentaremos debajo del árbol de mango ahora.</p>
+      <p>We'll sit beneath the mango tree now.</p>
+      <p class="alternate-color">Sí, siempre es mejor cuando estamos juntos.</p>
+      <p>Yeah, it's always better when we're together.</p>
+      <p class="alternate-color">Mmm, estamos en algún punto intermedio juntos.</p>
+      <p>Mmm, we're somewhere in between together.</p>
+      <p class="alternate-color">Bueno, siempre es mejor cuando estamos juntos.</p>
+      <p>Well, it's always better when we're together.</p>
+      <p class="alternate-color">Sí, siempre es mejor cuando estamos juntos.</p>
+      <p>Yeah, it's always better when we're together.</p>
+      <p class="alternate-color">creo en los recuerdos.</p>
+      <p>I believe in memories.</p>
+      <p class="alternate-color">Se ven tan, tan bonitos cuando duermo.</p>
+      <p>They look so, so pretty when I sleep.</p>
+      <p class="alternate-color">Oye ahora y cuando me despierte.</p>
+      <p>Hey now and, and when I wake up.</p>
+      <p class="alternate-color">Te ves tan bonita durmiendo a mi lado.</p>
+      <p>You look so pretty sleeping next to me.</p>
+      <p class="alternate-color">Pero no hay suficiente tiempo.</p>
+      <p>But there is not enough time.</p>
+      <p class="alternate-color">Y no hay ninguna canción que pueda cantar.</p>
+      <p>And there is no, no song I could sing.</p>
+      <p class="alternate-color">Y no hay combinación de palabras que pueda decir.</p>
+      <p>And there is no combination of words I could say.</p>
+      <p class="alternate-color">Pero aun así te diré una cosa.</p>
+      <p>But I will still tell you one thing.</p>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="backgroundAudio" loop>
+    <source src="https://drive.google.com/file/d/1xSL_ph7QrZonOazcrtRVQ5ojR4Jo49CX/view?usp=drive_link" type="audio/mpeg">
+    Tu navegador no soporta la reproducción de audio.
+  </audio>
+
+  <script>
+    let currentScreen = 1;
+    const totalScreens = 9;
+    const audio = document.getElementById('backgroundAudio');
+    const muteButton = document.querySelector('.mute-button');
+
+    // Reproducir audio automáticamente
+    audio.play();
+
+    function nextScreen() {
+      if (currentScreen === 1) {
+        const name = document.getElementById('nameInput').value;
+        document.getElementById('personalizedMessage').textContent = `${name}, este mensaje fue destinado solo para ti.`;
+      }
+
+      document.getElementById(`screen${currentScreen}`).classList.remove('active');
+      currentScreen++;
+
+      if (currentScreen <= totalScreens) {
+        document.getElementById(`screen${currentScreen}`).classList.add('active');
+      } else {
+        alert("Fin del mensaje. ¡Gracias!");
+      }
+    }
+
+    function goBackToScreen7() {
+      document.getElementById(`screen${currentScreen}`).classList.remove('active');
+      currentScreen = 7;
+      document.getElementById('screen7').classList.add('active');
+    }
+
+    function goToMusicDynamic() {
+      document.getElementById('screen7').classList.remove('active');
+      document.getElementById('screen8').classList.add('active');
+      currentScreen = 8;
+    }
+
+    function goToMusicBackground() {
+      document.getElementById('screen7').classList.remove('active');
+      document.getElementById('screen9').classList.add('active');
+      currentScreen = 9;
+    }
+
+    function goToPlaylist() {
+      window.open('https://open.spotify.com/playlist/52t0ovTdRyIleLz6Z0tQ56?si=4d033e5fec5c4b08&pt=d58487c56d2faceee1c7d790107098eb', '_blank');
+    }
+
+    function restartMusic() {
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function pauseMusic() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    // Función para mutear/desmutear
+    function toggleMute() {
+      if (audio.muted) {
+        audio.muted = false;
+        muteButton.textContent = "🔇";
+      } else {
+        audio.muted = true;
+        muteButton.textContent = "🔊";
+      }
+    }
+  </script>
+</body>
+</html>
